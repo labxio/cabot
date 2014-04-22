@@ -12,7 +12,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {'default': dj_database_url.parse(os.environ["DATABASE_URL"])}
+DATABASES = {'default': dj_database_url.parse(os.environ.get("DATABASE_URL", "sqlite:///dev.db"))}
 
 if not DEBUG:
     DATABASES['default']['OPTIONS'] = {'autocommit': True}
@@ -173,7 +173,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'verbose',
-            'filename': os.environ['LOG_FILE'],
+            'filename': os.environ.get('LOG_FILE', '/tmp/cabot.log'),
             'maxBytes': 1024 * 1024 * 25,  # 25 MB
             'backupCount': 5,
         },
