@@ -207,5 +207,11 @@ LOGGING = {
     }
 }
 
-from celeryconfig import *
-from cabot_config import *
+try:
+    from local_settings import *
+except:
+    try:
+        from celeryconfig import *
+        from cabot_config import *
+    except:
+        raise Exception("No configuration files found!")
